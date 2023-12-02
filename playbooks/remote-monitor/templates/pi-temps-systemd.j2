@@ -1,0 +1,12 @@
+[Unit]
+Description=Pi Temps
+After=network.target
+
+[Service]
+Type=simple
+User={{ temperature_monitor_user }}
+ExecStart={{ temperature_monitor_dir }}/scripts/pi-temps.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
