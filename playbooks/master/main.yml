@@ -44,6 +44,6 @@
         src: templates/temps.conf.j2
         dest: "{{ temperature_monitor_dir }}/scripts/temps.conf"
 
-    - include: tasks/database.yml
-    - include: tasks/app.yml
-    - include: tasks/scripts.yml
+    - include_tasks: tasks/database.yml
+    - include_tasks: tasks/app.yml
+    - include_tasks: tasks/scripts.yml
