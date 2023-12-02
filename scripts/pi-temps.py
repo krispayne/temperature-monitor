@@ -31,7 +31,7 @@ def readTempFromGPIO():
     temp_c = float(temp_data[2:]) / 1000
     temp_f = temp_c * 9.0 / 5.0 + 32.0
     # Adjust the temperature according to the configured offset.
-    temp_f_adjusted = temp_f + config['dashboard']['local_temp_offset']
+    temp_f_adjusted = temp_f + float(config['dashboard']['local_temp_offset'])
     temp = "{0:.2f}".format(temp_f_adjusted)
     return temp
 
@@ -48,4 +48,4 @@ while True:
     print("{0}, {1}".format(date, temp.rstrip()))
 
     # Wait [local_temp_read_delay] seconds.
-    time.sleep(config['dashboard']['local_temp_read_delay'])
+    time.sleep(int(config['dashboard']['local_temp_read_delay']))
