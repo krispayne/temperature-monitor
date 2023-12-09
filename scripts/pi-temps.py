@@ -50,11 +50,12 @@ while True:
         Point("Temperature Sensor")
         .tag("stationid", config['sensor']['station_id'])
         .tag("stationname", config['sensor']['station_name'])
-				.tag("sensor", config['sensor']['sensor'])
+		.tag("sensor", config['sensor']['sensor'])
         .field("temperature", temp)
     )
     # Send data to temperature logger.
     write_api.write(bucket=bucket, org=org, record=point)
+    print(temp.rstrip())
 
     # Wait [local_temp_read_delay] seconds.
     time.sleep(int(config['dashboard']['local_temp_read_delay']))
