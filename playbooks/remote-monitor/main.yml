@@ -9,10 +9,6 @@
     - name: restart pi-temps
       service: name=pi-temps state=restarted
 
-  pre_tasks:
-    - name: Ensure apt cache is updated.
-      apt: update_cache=yes cache_valid_time=86400
-
   roles:
     - common
     - geerlingguy.git
@@ -30,10 +26,6 @@
     - name: Install pip requirements.
       ansible.builtin.pip:
         name: influxdb_client 
-
-    - name: Clean up bad Python requests package so pip works.
-      shell: "rm -rf /usr/local/lib/python2.7/dist-packages/requests*"
-      changed_when: false
 
     - name: Ensure the temperature-monitor repository is present.
       git:
