@@ -56,7 +56,7 @@ while True:
     )
     # Send data to temperature logger.
     write_api.write(bucket=bucket, org=org, record=point)
-    print(temp.rstrip())
+    print(str(temp.rstrip()))
 
     # Wait [local_temp_read_delay] seconds.
     time.sleep(int(config['dashboard']['local_temp_read_delay']))
