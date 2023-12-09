@@ -6,15 +6,20 @@
 import os
 import glob
 import time
-from datetime import datetime
-import calendar
-import requests
-from temp_api import postTempData
 import configparser
+import influxdb_client
 
 config = configparser.ConfigParser()
 config_dir = os.path.dirname(os.path.abspath(__file__))
 config.read(config_dir + '/temps.conf')
+
+token = os.environ.get("INFLUXDB_TOKEN")
+org = config['influxdb']['influxdb_org']
+url = config['influxdb']['influxdb_url']
+bucket = config['influxdb']['influxdb_bucket']
+client = influxdb_client.InfluxDBClient(url=url, token=token, org=org)
+
+write_api = client.write_api(write_options=SYNCHRONOUS)
 
 # Read the temperature from a connected DS18B20 temperature sensor.
 def readTempFromGPIO():
@@ -38,14 +43,15 @@ def readTempFromGPIO():
 while True:
     # Get current temperature and timestamp.
     temp = readTempFromGPIO()
-    date = datetime.utcnow()
-    timestamp = calendar.timegm(date.utctimetuple())
-
+    point = (
+        Point("Temperature Sensor")
+        .tag("stationid", config['sensor']['station_id'])
+        .tag("stationname", config['sensor']['station_name'])
+				.tag("sensor", config['sensor']['sensor'])
+        .field("temperature", temp)
+    )
     # Send data to temperature logger.
-    postTempData(config['dashboard']['local_sensor_id'], temp, timestamp)
-
-    # Log data to command line.
-    print("{0}, {1}".format(date, temp.rstrip()))
+    write_api.write(bucket=bucket, org=org, record=point)
 
     # Wait [local_temp_read_delay] seconds.
     time.sleep(int(config['dashboard']['local_temp_read_delay']))
