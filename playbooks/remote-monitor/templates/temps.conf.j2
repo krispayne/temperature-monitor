@@ -11,12 +11,12 @@ owm_sensor_id = {{ owm_sensor_id }}
 owm_city_id = '{{ owm_city_id }}'
 
 [sensor]
-station_id = '{{ station_id }}'
-station_name = '{{ station_name }}'
-sensor = '{{ sensor }}'
+station_id = {{ station_id }}
+station_name = {{ station_name }}
+sensor = {{ sensor }}
 
 [influxdb]
-influxdb_token = '{{ influxdb_token }}'
-influxdb_org = '{{ influxdb_org }}'
-influxdb_url = '{{ influxdb_url }}'
-influxdb_bucket = '{{ influxdb_bucket }}'
+influxdb_token = {{ influxdb_token }}
+influxdb_org = {{ influxdb_org }}
+influxdb_url = {{ influxdb_url }}
+influxdb_bucket = {{ influxdb_bucket }}
