@@ -16,7 +16,7 @@ config = configparser.ConfigParser()
 config_dir = os.path.dirname(os.path.abspath(__file__))
 config.read(config_dir + '/temps.conf')
 
-token = os.environ.get("INFLUXDB_TOKEN")
+token = config['influxdb']['influxdb_token']
 org = config['influxdb']['influxdb_org']
 url = config['influxdb']['influxdb_url']
 bucket = config['influxdb']['influxdb_bucket']

@@ -41,9 +41,10 @@ station_name: 'Living Room'
 sensor: 'DS18B20'
 
 # InfluxDB configuration
-influxdb_org: '5146'
-influxdb_url: 'http://mon.krispayne.net:8086'
-influxdb_bucket: 'House Temperatures'
+influxdb_token: 1234
+influxdb_org: 5146
+influxdb_url: http://mon.krispayne.net:8086
+influxdb_bucket: House Temperatures
 
 # Nest credentials (if empty, will not be used).
 nest_access_token: ""
