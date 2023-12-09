@@ -45,7 +45,7 @@ while True:
     # Get current temperature and timestamp.
     temp = readTempFromGPIO()
     point = (
-        Point("Temperature Sensor")
+        client.Point("Temperature Sensor")
         .tag("stationid", config['sensor']['station_id'])
         .tag("stationname", config['sensor']['station_name'])
 				.tag("sensor", config['sensor']['sensor'])
